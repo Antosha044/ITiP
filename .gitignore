@@ -1,0 +1,7 @@
+*.class
+
+*.log
+*.tmp
+
+bin/
+out/
