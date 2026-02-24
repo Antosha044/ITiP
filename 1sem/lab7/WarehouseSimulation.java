@@ -12,18 +12,22 @@ public class WarehouseSimulation {
 
         private final int MAX_WEIGHT = 150;
 
-        private Lock lock = new ReentrantLock();
+        private Lock lock = new ReentrantLock(true);
         private Condition canLoad = lock.newCondition();
 
         public Warehouse(List<Integer> goodsList) {
             this.goods = new LinkedList<>(goodsList);
         }
 
-        public void loadGoods(String loaderName) throws InterruptedException {
+        public boolean loadGoods(String loaderName) throws InterruptedException {
             lock.lock();
             try {
-                while (goods.isEmpty()) {
-                    return; 
+                if (goods.isEmpty()) {
+                    if (currentWeight >0) {
+                        currentWeight = 0;
+                        canLoad.signalAll();
+                    }
+                    return false; 
                 }
 
                 int weight = goods.peek();
@@ -40,19 +44,14 @@ public class WarehouseSimulation {
                         " kg, current weight: " + currentWeight);
 
                 if (currentWeight == MAX_WEIGHT) {
-                    sendTruck();
+                    currentWeight = 0;
+                    System.out.println("the truck is gone");
+                    canLoad.signalAll();
                 }
-
+                return true;
             } finally {
                 lock.unlock();
             }
-        }
-
-        private void sendTruck() throws InterruptedException {
-            System.out.println("The truck is gone");
-            currentWeight = 0;
-
-            canLoad.signalAll(); 
         }
     }
 
@@ -69,7 +68,7 @@ public class WarehouseSimulation {
         @Override
         public void run() {
             try {
-                while (true) {
+                while (warehouse.loadGoods(name)) {
                     warehouse.loadGoods(name);
                 }
             } catch (InterruptedException e) {

@@ -3,7 +3,13 @@
 *.pdf
 *.log
 *.tmp
+*.iml
 
+target/
+.idea/
+.classpath
+.project
+.settings/
 bin/
 out/
 task2_lms/
