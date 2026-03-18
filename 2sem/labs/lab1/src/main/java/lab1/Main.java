@@ -7,17 +7,17 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        logger.info("Application started");
+        logger.info("start");
 
-        Person person = new Person("Ivan", 25);
-        logger.debug("Created person object: {}", person);
+        Person person = new Person("kolyan", 67);
+        logger.info("created object: {}", person);
 
         String json = JsonUtil.toJson(person);
-        logger.info("Serialized to JSON: {}", json);
+        logger.info("serialized to json: {}", json);
 
         Person p2 = JsonUtil.fromJson(json);
-        logger.info("Deserialized person: {}", p2);
+        logger.info("deserialized object: {}", p2);
 
-        logger.info("Application finished");
+        logger.info("finish");
     }
 }
