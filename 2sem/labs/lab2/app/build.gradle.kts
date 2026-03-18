@@ -13,10 +13,10 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":string-utils"))
     implementation("org.apache.commons:commons-lang3:3.20.0")
     implementation("org.slf4j:slf4j-api:2.0.17")
     implementation("ch.qos.logback:logback-classic:1.5.32")
-    testImplementation("junit:junit:4.13.2")
 }
 
 java {

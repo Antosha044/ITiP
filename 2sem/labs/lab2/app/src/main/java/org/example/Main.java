@@ -1,4 +1,5 @@
 package org.example;
+import org.example.utils.StringProcessor;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -47,6 +48,22 @@ public class Main {
 
         logger.info("reversed string: {}", reversed);
         logger.info("capitalized: {}", capitalized);
+
+        logger.info("end");
+
+
+
+        logger.info("start string utils module");
+
+        Scanner scanner2 = new Scanner(System.in);
+        System.out.print("input string: ");
+        String input2 = scanner2.nextLine();
+
+        String reversed2 = StringProcessor.reverse(input);
+        String capitalized2 = StringProcessor.capitalize(input);
+
+        logger.info("reversed string: {}", reversed2);
+        logger.info("capitalized: {}", capitalized2);
 
         logger.info("end");
     }
