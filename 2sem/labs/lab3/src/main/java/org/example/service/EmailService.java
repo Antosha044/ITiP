@@ -1,7 +1,6 @@
 package org.example.service;
 
 import org.springframework.stereotype.Service; 
-import org.springframework.stereotype.Service; 
 
 @Service("customEmail")
 public class EmailService implements MessageService {
