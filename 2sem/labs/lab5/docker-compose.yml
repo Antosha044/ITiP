@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: lab13-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: spring_lab3_notifications
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - lab13-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d spring_lab3_notifications"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  lab13-pgdata:
